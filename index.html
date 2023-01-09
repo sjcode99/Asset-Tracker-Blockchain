@@ -14,35 +14,51 @@
       src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js"
       charset="utf-8"
     ></script>
-    <!-- <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.js"
-    ></script> -->
   </head>
   <body>
     <nav class="navbar navbar-light bg-light">
-      <span class="navbar-brand mb-0 h1">Parcel Tracker</span>
-      <button
-        type="button"
-        class="btn btn-primary"
-        data-toggle="modal"
-        data-target="#exampleModal"
-      >
-        Create Asset
-      </button>
-      <form class="form-inline my-2 my-lg-0">
+      <a href="/">
+        <span class="navbar-brand mb-0 h1">Parcel Tracker</span>
+      </a>
+
+      <!-- search section in navbar -->
+      <!-- <form class="form-inline my-2 my-lg-0">
         <input
           class="form-control mr-sm-2"
           name="id"
-          type="search"
+          type="text"
           placeholder="Search Asset"
           aria-label="Search"
-        />
+          required
+        /> -->
         <!-- <button class="btn btn-secondary my-2 my-sm-0" type="submit"> -->
-        <button class="btn btn-secondary my-2 my-sm-0" type="button" onclick="searchAsset()">
+        <!-- <button
+          class="btn btn-secondary my-2 my-sm-0"
+          type="button"
+          onclick="searchAsset()"
+        >
           Search
+        </button> -->
+      <!-- </form> -->
+      <div class="asset-control">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          Create Asset
         </button>
-      </form>
+        <a type="button" class="btn btn-primary" href="searchAsset.html">
+          Track Asset
+        </a>
+        <a type="button" class="btn btn-primary" href="transfer.html">
+          update Asset
+        </a>
+        <!-- <button type="button" class="btn btn-primary" onclick="onLogin()">
+          Login
+        </button> -->
+      </div>
     </nav>
     <br />
     <div class="container">
@@ -54,6 +70,7 @@
           </div>
         </div>
       </h2>
+      <div id="giveInput"></div>
       <table class="table table-hover" id="searchResult">
         <thead>
           <tr>
@@ -69,13 +86,8 @@
         <tbody></tbody>
       </table>
       <br />
-      
-      <div  style="text-align: right;">
-        <a href="assetDetail.html">Asset Details>>></a>
-      </div>
-  
-      <!-- code for modal -->
 
+      <!-- code for modal -->
       <div
         class="modal fade"
         id="exampleModal"
@@ -100,56 +112,92 @@
               </button>
             </div>
             <div class="modal-body">
-              <div class="container">
-                <div class="form-group">
-                  <input
-                    type="text"
-                    name="batchNo"
-                    class="form-control"
-                    placeholder="Batch Number"
-                  />
+              <form #create>
+
+                <div class="container">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      maxlength="5"
+                      required
+                      minlength="5"
+                      name="batchNo"
+                      class="form-control"
+                      placeholder="Batch Number"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      name="name"
+                      class="form-control"
+                      placeholder="Name"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      name="desc"
+                      class="form-control"
+                      placeholder="Description"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      name="manufacturer"
+                      class="form-control"
+                      placeholder="Manufacturer"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      name="owner"
+                      class="form-control"
+                      placeholder="Owner"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <!-- <input
+                      type="text"
+                      name="status"
+                      class="form-control"
+                      placeholder="Current Status"
+                    /> -->
+                    <select class="form-control"  name="status" id="status"  placeholder="Current Status"
+                     aria-label="Default select example">
+                      <option  value="item_booked">Item Booked</option>
+                      <option value="shipped">Shipped</option>
+                      <option value="In_Transit">In Transit</option>
+                      <option value="delivered">Delivered</option>
+                    </select>
+                  </div>
+                  <div class="form-group row ">
+                    <div class="col-md-6">
+
+                      <input
+                        type="text"
+                        name="latitude"
+                        readonly
+                        class="form-control"
+                        placeholder="Latitude"
+                      />
+                    </div>
+                    <div class="col-md-6">
+
+                      <input
+                        type="text"
+                        name="longitude"
+                        readonly
+                        class="form-control"
+                        placeholder="Longitude"
+                      />
+                    </div>
+                  </div>
+                  <p class="getCoords" onclick="getCoordinates()">get coordinates</p>
                 </div>
-                <div class="form-group">
-                  <input
-                    type="text"
-                    name="name"
-                    class="form-control"
-                    placeholder="Name"
-                  />
-                </div>
-                <div class="form-group">
-                  <input
-                    type="text"
-                    name="desc"
-                    class="form-control"
-                    placeholder="Description"
-                  />
-                </div>
-                <div class="form-group">
-                  <input
-                    type="text"
-                    name="manufacturer"
-                    class="form-control"
-                    placeholder="Manufacturer"
-                  />
-                </div>
-                <div class="form-group">
-                  <input
-                    type="text"
-                    name="owner"
-                    class="form-control"
-                    placeholder="Owner"
-                  />
-                </div>
-                <div class="form-group">
-                  <input
-                    type="text"
-                    name="status"
-                    class="form-control"
-                    placeholder="Current Status"
-                  />
-                </div>
-              </div>
+              </form>
             </div>
             <div class="modal-footer">
               <button
