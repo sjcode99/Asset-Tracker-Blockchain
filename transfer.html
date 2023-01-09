@@ -20,12 +20,18 @@
   <body>
     <!-- navbar -->
     <nav class="navbar navbar-light bg-light">
-      <span class="navbar-brand mb-0 h1">Asset Tracker</span>
+      <a href="/">
+        <span class="navbar-brand mb-0 h1">Parcel Tracker</span>
+      </a>
+      <a type="button" class="btn btn-primary" href="searchAsset.html">
+        search Asset
+      </a>
     </nav>
 
     <div class="container">
-      <h2 class="display-4" style="color: #218f76">Transfer Asset</h2>
-      <br />
+      <h2 class="display-5 font-weight-bold mt-4" style="color: #218f76">
+        Transfer Asset
+      </h2>
       <!-- transfer form -->
       <div class="row">
         <div class="col">
@@ -34,6 +40,7 @@
               <input
                 type="number"
                 name="id"
+                id="transferInput"
                 class="form-control"
                 placeholder="Id of the asset"
               />
@@ -60,13 +67,41 @@
               />
             </div>
             <div class="form-group">
-              <input
+              <!-- <input
                 type="text"
                 name="newStatus"
                 class="form-control"
                 placeholder="New status of the asset"
-              />
+              /> -->
+              <select class="form-control"  name="newStatus" id="newStatus" aria-label="Default select example">
+                <option selected value="item_booked">Item Booked</option>
+                <option value="shipped">Shipped</option>
+                <option value="In_Transit">In Transit</option>
+                <option value="delivered">Delivered</option>
+              </select>
             </div>
+            <!-- location part -->
+            <div class="form-group row">
+              <div class="col-md-6">
+                <input
+                  type="text"
+                  name="newLatitude"
+                  readonly
+                  class="form-control"
+                  placeholder="Latitude"
+                />
+              </div>
+              <div class="col-md-6">
+                <input
+                  type="text"
+                  name="newLongitude"
+                  readonly
+                  class="form-control"
+                  placeholder="Longitude"
+                />
+              </div>
+            </div>
+            <p class="getCoords" onclick="getCoordinates()">get coordinates</p>
             <div class="form-group">
               <button onclick="transferAsset()" class="btn btn-success">
                 Transfer
@@ -75,14 +110,6 @@
           </div>
         </div>
       </div>
-
-      <div>
-        <a href="assetDetail.html">>>>>Back</a>
-      </div>
-      <div style="text-align: right">
-        <a href="events.html">Events>>>></a>
-      </div>
-
     </div>
     <!-- <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
