@@ -1,5 +1,5 @@
-// SPDX-License-Identifier: MIT
-pragma solidity >=0.4.21;
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.5.16;
 // pragma solidity 0.4.21 <0.6.0;
 
 contract Migrations {
