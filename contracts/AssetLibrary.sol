@@ -1,20 +1,22 @@
-// SPDX-License-Identifier: MIT
-pragma solidity >=0.4.21;
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.5.16;
 
 library AssetLibrary {
     struct Asset {
         uint id;
-        string batchNo;
+        uint batchNo;
         string name;
         string description;
         string manufacturer;
-        
         uint statusCount;
-        mapping(uint => Status) status;
+        mapping(uint => StatusDetail) articleStatus;
     }
-    struct Status {
+    struct StatusDetail {
         uint time;
-        string status;
+        string currentStatus;
         string owner;
+        string latitude;
+        string longitude;
+
     }
 }
